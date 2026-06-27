@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 - Personas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h1>Registro de Personas</h1>
+
+    <a href="index.html">← Volver al inicio</a>
+
+    <h2>Agregar Persona</h2>
+
+    <form id="formPersona">
+
+        <label>Nombre:</label><br>
+        <input type="text" id="nombre" required><br><br>
+
+        <label>Apellido:</label><br>
+        <input type="text" id="apellido" required><br><br>
+
+        <label>Edad:</label><br>
+        <input type="number" id="edad" required><br><br>
+
+        <label>Altura (m):</label><br>
+        <input type="number" id="altura" step="0.01" required><br><br>
+
+        <label>Peso (kg):</label><br>
+        <input type="number" id="peso" step="0.1" required><br><br>
+
+        <button type="submit">Agregar Persona</button>
+
+    </form>
+
+    <br>
+
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th>IMC</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaPersonas">
+
+        </tbody>
+
+    </table>
+
+    <script src="js/personas.js"></script>
+
+</body>
+
+</html>

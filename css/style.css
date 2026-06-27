@@ -23,3 +23,27 @@ button{
     padding:10px 15px;
     cursor:pointer;
 }
+form{
+    margin-top:20px;
+    margin-bottom:30px;
+}
+
+input{
+    width:200px;
+    padding:8px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
+
+th{
+    background-color:#f2f2f2;
+}
