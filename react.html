@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ejercicio 3 - React Nativo</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+
+    <h1>Registro de Personas con React</h1>
+    <a href="index.html">Volver al inicio</a>
+    <br><br>
+
+    <div id="root"></div>
+
+    <script>
+        const { useState,页 } = React;
+        const e = React.createElement;
+
+        function App() {
+            const [personas, setPersonas] = useState([]);
+            const [nombre, setNombre] = useState("");
+            const [apellido, setApellido] = useState("");
+            const [edad, setEdad] = useState("");
+            const [altura, setAltura] = useState("");
+            const [peso, setPeso] = useState("");
+
+            function agregarPersona(event) {
+                event.preventDefault();
+                const nuevaPersona = {
+                    id: Date.now(),
+                    nombre,
+                    apellido,
+                    edad,
+                    altura: parseFloat(altura),
+                    peso: parseFloat(peso)
+                };
+                setPersonas([...personas, nuevaPersona]);
+                setNombre(""); setApellido(""); setEdad(""); setAltura(""); setPeso("");
+            }
+
+            function eliminarPersona(id) {
+                setPersonas(personas.filter(p => p.id !== id));
+            }
+
+            function calcularIMC(p, a) {
+                if (!a || a <= 0) return "0.00";
+                return (p / (a * a)).toFixed(2);
+            }
+
+            // Construcción de la interfaz sin JSX (React Puro)
+            return e("div", null,
+                e("form", { onSubmit: agregarPersona },
+                    e("input", { type: "text", placeholder: "Nombre", value: nombre, onChange: ev => setNombre(ev.target.value), required: true }),
+                    e("br"), e("br"),
+                    e("input", { type: "text", placeholder: "Apellido", value: apellido, onChange: ev => setApellido(ev.target.value), required: true }),
+                    e("br"), e("br"),
+                    e("input", { type: "number", placeholder: "Edad", value: edad, onChange: ev => setEdad(ev.target.value), required: true }),
+                    e("br"), e("br"),
+                    e("input", { type: "number", step: "0.01", placeholder: "Altura (m)", value: altura, onChange: ev => setAltura(ev.target.value), required: true }),
+                    e("br"), e("br"),
+                    e("input", { type: "number", step: "0.1", placeholder: "Peso (kg)", value: peso, onChange: ev => setPeso(ev.target.value), required: true }),
+                    e("br"), e("br"),
+                    e("button", { type: "submit" }, "Agregar Persona")
+                ),
+                e("br"),
+                e("table", { border: "1", cellPadding: "5", style: { width: "100%", textAlign: "left" } },
+                    e("thead", null,
+                        e("tr", null,
+                            e("th", null, "Nombre"), e("th", null, "Apellido"), e("th", null, "Edad"),
+                            e("th", null, "Altura"), e("th", null, "Peso"), e("th", null, "IMC"), e("th", null, "Acción")
+                        )
+                    ),
+                    e("tbody", null,
+                        personas.length === 0 
+                            ? e("tr", null, e("td", { colSpan: 7, style: { textAlign: "center" } }, "No hay personas registradas."))
+                            : personas.map(p => 
+                                e("tr", { key: p.id },
+                                    e("td", null, p.nombre),
+                                    e("td", null, p.apellido),
+                                    e("td", null, p.edad),
+                                    e("td", null, p.altura + " m"),
+                                    e("td", null, p.peso + " kg"),
+                                    e("td", null, e("strong", null, calcularIMC(p.peso, p.altura))),
+                                    e("td", null, e("button", { onClick: () => eliminarPersona(p.id), style: { color: "red" } }, "Eliminar"))
+                                )
+                            )
+                    )
+                )
+            );
+        }
+
+        // Renderizado directo en React 18 sin intermediarios
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(e(App));
+    </script>
+</body>
+
+</html>
