@@ -60,7 +60,7 @@
                     e("br"), e("br"),
                     e("input", { type: "text", placeholder: "Apellido", value: apellido, onChange: ev => setApellido(ev.target.value), required: true }),
                     e("br"), e("br"),
-                    e("input", { type: "number", placeholder: "Edad", value: edad, onChange: ev => setEdad(ev.target.value), required: true }),
+                    e("input", { type: "number", placeholder: "Edad", value: edad, onChange: ev => setEdad(ev.target.value), required: true, min: "0", max: "120" }),
                     e("br"), e("br"),
                     e("input", { type: "number", step: "0.01", placeholder: "Altura (m)", value: altura, onChange: ev => setAltura(ev.target.value), required: true }),
                     e("br"), e("br"),
